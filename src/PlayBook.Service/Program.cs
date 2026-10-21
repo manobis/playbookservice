@@ -1,7 +1,11 @@
 var builder = WebApplication.CreateBuilder(args);
 
 // 1. Register modern native OpenAPI document generation
-builder.Services.AddControllers(); // 👈 1. REGISTER CONTROLLER SERVICES
+builder.Services.AddControllers(options =>
+{
+    options.SuppressAsyncSuffixInActionNames = false;
+});
+
 builder.Services.AddOpenApi();
 
 var app = builder.Build();

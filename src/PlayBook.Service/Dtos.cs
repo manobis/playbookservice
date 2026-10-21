@@ -1,7 +1,6 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Playbook.Service.Dtos
+namespace PlayBook.Service.Dtos
 {
     public record ItemDto(Guid Id, string Name, string Description, decimal Price, DateTimeOffset CreatedDate);
     public record CreateItemDto([Required] string Name, [Required] string Description, [Range(0, 1000)] decimal Price);
