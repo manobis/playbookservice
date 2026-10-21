@@ -27,7 +27,7 @@ namespace Playbook.Service.Controller
         public ActionResult<ItemDto> GetById(Guid id)
         {
             var item = items.Where(item => item.Id == id).SingleOrDefault();
-            if (item is null)
+            if (item == null)
             {
                 return NotFound();
             }
@@ -44,7 +44,7 @@ namespace Playbook.Service.Controller
             return CreatedAtAction(nameof(GetById), new { id = item.Id }, item);
         }
 
-        // Update
+        // Update /items/{id}
         [HttpPut("{id}")]
         public IActionResult Put(Guid id, UpdateItemDto updateItemDto)
         {
@@ -63,7 +63,7 @@ namespace Playbook.Service.Controller
             return NoContent();
         }
 
-        // DELETE /items
+        // DELETE /items/{id}
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {
