@@ -14,15 +14,6 @@ namespace PlayBook.Service.Controller
     [Route("items")]
     public class ItemsController : ControllerBase
     {
-        // private static readonly List<ItemDto> items = new()
-        // {
-        //     new ItemDto(Guid.NewGuid(), "Potion", "Restores a small amount of HP", 5, DateTimeOffset.UtcNow),
-        //     new ItemDto(Guid.NewGuid(), "Antidote", "Cures poision", 7, DateTimeOffset.UtcNow),
-        //     new ItemDto(Guid.NewGuid(), "Bronze sword", "Deals a small amount of damage", 20, DateTimeOffset.UtcNow)
-        // };
-
-
-
         private readonly ItemsRepository itemsRepository = new();
 
         // GET /items

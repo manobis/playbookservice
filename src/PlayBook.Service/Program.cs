@@ -1,4 +1,14 @@
+// Register a Global Serializer
+// If there are multiple entities using Guid and you don't want to add attributes 
+// to every single file, you can register a global rule as below.
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.Serializers;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Tell MongoDB to automatically treat all C# Guids as standard Bson BinaryData subtypes
+BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard));
 
 // 1. Register modern native OpenAPI document generation
 builder.Services.AddControllers(options =>
