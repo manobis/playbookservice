@@ -2,16 +2,17 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using MongoDB.Driver;
 using PlayBook.Service.Entities;
+using PlayBook.Service.Repositories;
 
 namespace PlayBook.Service.Repositories
 {
-    public class ItemsRepository
+    public class ItemsRepository : IItemsRepository
     {
         private const string collectionName = "items";
         private readonly IMongoCollection<Item> dbCollection;
         private readonly FilterDefinitionBuilder<Item> filterBuilder = Builders<Item>.Filter;
 
-        public ItemsRepository()
+        public ItemsRepository(IMongoDatabase database)
         {
             // Containerization: 
             // MongoDB running in Docker Desktop, maps its ports to your Windows localhost @ 27017.
@@ -26,8 +27,13 @@ namespace PlayBook.Service.Repositories
             // docker run -d --name mongo -p 27017:27017 -v mongodbdata:/data/db mongo
             // (Note: no -rm flag in this. The container stays and not destroyed.)
 
-            var mongoClient = new MongoClient("mongodb://localhost:27017");
-            var database = mongoClient.GetDatabase("Catalog");
+            // Upon dependency injection and configuration System, the below two commented
+            // out lines are no more necessary. The settings in handled in the appsettings.json 
+            // file under the name "MongoDbSettings" and "ServiceSettings".
+
+            // var mongoClient = new MongoClient("mongodb://localhost:27017");
+            // var database = mongoClient.GetDatabase("Catalog");
+
             dbCollection = database.GetCollection<Item>(collectionName);
         }
 
